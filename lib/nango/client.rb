@@ -39,6 +39,10 @@ module Nango
       @records ||= Nango::Records.new(client: self)
     end
 
+    def proxy
+      @proxy ||= Nango::Proxy.new(client: self)
+    end
+
     def connections
       @connections ||= Nango::Connections.new(client: self)
     end

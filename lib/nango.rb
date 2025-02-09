@@ -8,6 +8,7 @@ require_relative "nango/integrations"
 require_relative "nango/actions"
 require_relative "nango/connections"
 require_relative "nango/records"
+require_relative "nango/proxy"
 require_relative "nango/version"
 
 module Nango

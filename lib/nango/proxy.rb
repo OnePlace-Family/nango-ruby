@@ -1,21 +1,20 @@
 module Nango
-  class Actions
+  class Proxy
     def initialize(client:)
       @client = client
     end
 
-    def trigger(
-      connection_id:,
-      integration_id:,
-      action:
-    )
+    def get(connection_id:, integration_id:, path:, parameters: {})
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client.get(path: "/proxy/#{path}", parameters: parameters)
+    end
+
+    def post(connection_id:, integration_id:, path:, parameters: {}, query_parameters: {})
       client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
       client.json_post(
-        path: "/action/trigger",
-        parameters: {
-          action_name: action.name,
-          input: action.input
-        }
+        path: "/proxy/#{path}",
+        parameters: parameters,
+        query_parameters: query_parameters
       )
     end
 
