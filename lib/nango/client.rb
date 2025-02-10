@@ -46,6 +46,10 @@ module Nango
     def connections
       @connections ||= Nango::Connections.new(client: self)
     end
+    
+    def connect
+      @connect ||= Nango::Connect.new(client: self)
+    end
 
     def inspect
       vars = instance_variables.map do |var|

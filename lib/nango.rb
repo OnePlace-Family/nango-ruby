@@ -10,6 +10,7 @@ require_relative "nango/connections"
 require_relative "nango/records"
 require_relative "nango/proxy"
 require_relative "nango/version"
+require_relative "nango/connect"
 
 module Nango
   class Error < StandardError; end

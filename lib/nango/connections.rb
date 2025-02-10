@@ -5,15 +5,15 @@ module Nango
     end
 
     def list
-      @client.get(path: "/connections")
+      @client.get(path: "/connection")
     end
 
-    def get(id:)
-      @client.get(path: "/connections/#{id}")
+    def get(id:,provider:)
+      @client.get(path: "/connection/#{id}?provider_config_key=#{provider}")
     end
 
     def delete(id:)
-      @client.delete(path: "/connections/#{id}")
+      @client.delete(path: "/connection/#{id}")
     end
   end
 end
