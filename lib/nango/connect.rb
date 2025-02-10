@@ -4,7 +4,7 @@ module Nango
       @client = client
     end
 
-    def create(parameters:{})
+    def create_session(parameters:{})
       @client.json_post(
         path: "/connect/sessions",
         parameters: parameters,        
