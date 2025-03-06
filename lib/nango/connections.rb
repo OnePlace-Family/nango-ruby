@@ -12,8 +12,8 @@ module Nango
       @client.get(path: "/connection/#{id}?provider_config_key=#{provider}")
     end
 
-    def delete(id:)
-      @client.delete(path: "/connection/#{id}")
+    def delete(id:,provider:)
+      @client.delete(path: "/connection/#{id}?provider_config_key=#{provider}")
     end
   end
 end
