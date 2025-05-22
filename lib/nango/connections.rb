@@ -8,11 +8,11 @@ module Nango
       @client.get(path: "/connection")
     end
 
-    def get(id:,provider:)
+    def get(id:, provider:)
       @client.get(path: "/connection/#{id}?provider_config_key=#{provider}")
     end
 
-    def delete(id:,provider:)
+    def delete(id:, provider:)
       @client.delete(path: "/connection/#{id}?provider_config_key=#{provider}")
     end
   end

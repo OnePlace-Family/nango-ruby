@@ -4,28 +4,35 @@ module Nango
   module HTTP
     include HTTPHeaders
 
-    def get(path:, parameters: nil)
+    def get(path:, parameters: nil, headers: nil)
       parse_jsonl(conn.get(uri(path: path), parameters) do |req|
-        req.headers = headers
+        req.headers = self.headers
+
+        add_proxy_request_headers(req, headers) if headers
       end&.body)
     end
 
-    def post(path:)
+    def post(path:, headers: nil)
       parse_jsonl(conn.post(uri(path: path)) do |req|
         req.headers = headers
+
+        add_proxy_request_headers(req, headers) if headers
       end&.body)
     end
 
-    def json_post(path:, parameters:, query_parameters: {})
+    def json_post(path:, parameters:, query_parameters: {}, headers: nil)
       conn.post(uri(path: path)) do |req|
         configure_json_post_request(req, parameters)
         req.params = req.params.merge(query_parameters)
+
+        add_proxy_request_headers(req, headers) if headers
       end&.body
     end
 
-    def delete(path:)
+    def delete(path:, headers: nil)
       conn.delete(uri(path: path)) do |req|
         req.headers = headers
+        add_proxy_request_headers(req, headers) if headers
       end&.body
     end
 
@@ -39,6 +46,12 @@ module Nango
       response = response.gsub("}\n{", "},{").prepend("[").concat("]")
 
       JSON.parse(response)
+    end
+
+    def add_proxy_request_headers(req, headers)
+      headers.each do |key, value|
+        req.headers["nango-proxy-#{key}"] = value
+      end
     end
 
     def conn(multipart: false)

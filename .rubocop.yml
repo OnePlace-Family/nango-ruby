@@ -29,3 +29,6 @@ Style/StringLiterals:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/ParameterLists:
+  Max: 6
