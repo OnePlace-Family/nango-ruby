@@ -29,6 +29,36 @@ module Nango
       end&.body
     end
 
+    def put(path:, parameters: nil, headers: nil)
+      parse_jsonl(conn.put(uri(path: path), parameters) do |req|
+        req.headers = self.headers
+        add_proxy_request_headers(req, headers) if headers
+      end&.body)
+    end
+
+    def patch(path:, parameters: nil, headers: nil)
+      parse_jsonl(conn.patch(uri(path: path), parameters) do |req|
+        req.headers = self.headers
+        add_proxy_request_headers(req, headers) if headers
+      end&.body)
+    end
+
+    def json_put(path:, parameters:, query_parameters: {}, headers: nil)
+      conn.put(uri(path: path)) do |req|
+        configure_json_post_request(req, parameters)
+        req.params = req.params.merge(query_parameters)
+        add_proxy_request_headers(req, headers) if headers
+      end&.body
+    end
+
+    def json_patch(path:, parameters:, query_parameters: {}, headers: nil)
+      conn.patch(uri(path: path)) do |req|
+        configure_json_post_request(req, parameters)
+        req.params = req.params.merge(query_parameters)
+        add_proxy_request_headers(req, headers) if headers
+      end&.body
+    end
+
     def delete(path:, headers: nil)
       conn.delete(uri(path: path)) do |req|
         req.headers = headers

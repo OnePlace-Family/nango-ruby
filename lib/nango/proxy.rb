@@ -32,6 +32,50 @@ module Nango
       )
     end
 
+    def put(
+      connection_id:,
+      integration_id:,
+      path:,
+      parameters: {},
+      query_parameters: {},
+      headers: nil
+    )
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client.json_put(
+        path: "/proxy/#{path}",
+        parameters: parameters,
+        query_parameters: query_parameters,
+        headers: headers
+      )
+    end
+
+    def patch(
+      connection_id:,
+      integration_id:,
+      path:,
+      parameters: {},
+      query_parameters: {},
+      headers: nil
+    )
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client.json_patch(
+        path: "/proxy/#{path}",
+        parameters: parameters,
+        query_parameters: query_parameters,
+        headers: headers
+      )
+    end
+
+    def delete(
+      connection_id:,
+      integration_id:,
+      path:,
+      headers: nil
+    )
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client.delete(path: "/proxy/#{path}", headers: headers)
+    end
+
     private
 
     def client_for_connection(connection_id:, integration_id:)
