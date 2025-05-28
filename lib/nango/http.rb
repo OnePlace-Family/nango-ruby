@@ -7,15 +7,13 @@ module Nango
     def get(path:, parameters: nil, headers: nil)
       parse_jsonl(conn.get(uri(path: path), parameters) do |req|
         req.headers = self.headers
-
         add_proxy_request_headers(req, headers) if headers
       end&.body)
     end
 
     def post(path:, headers: nil)
       parse_jsonl(conn.post(uri(path: path)) do |req|
-        req.headers = headers
-
+        req.headers = self.headers
         add_proxy_request_headers(req, headers) if headers
       end&.body)
     end
@@ -61,6 +59,8 @@ module Nango
 
     def delete(path:, headers: nil)
       conn.delete(uri(path: path)) do |req|
+        req.headers = self.headers
+
         add_proxy_request_headers(req, headers) if headers
       end&.body
     end
