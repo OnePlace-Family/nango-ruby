@@ -61,7 +61,6 @@ module Nango
 
     def delete(path:, headers: nil)
       conn.delete(uri(path: path)) do |req|
-        req.headers = headers
         add_proxy_request_headers(req, headers) if headers
       end&.body
     end
