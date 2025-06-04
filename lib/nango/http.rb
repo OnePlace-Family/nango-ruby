@@ -4,11 +4,15 @@ module Nango
   module HTTP
     include HTTPHeaders
 
-    def get(path:, parameters: nil, headers: nil)
-      parse_jsonl(conn.get(uri(path: path), parameters) do |req|
+    def get(path:, parameters: nil, headers: nil, json: true)
+      response = conn.get(uri(path: path), parameters) do |req|
         req.headers = self.headers
         add_proxy_request_headers(req, headers) if headers
-      end&.body)
+      end&.body
+
+      return response unless json
+
+      parse_jsonl(response)
     end
 
     def post(path:, headers: nil)
