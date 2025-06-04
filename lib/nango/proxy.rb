@@ -9,10 +9,16 @@ module Nango
       integration_id:,
       path:,
       parameters: {},
-      headers: nil
+      headers: nil,
+      json: true
     )
       client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
-      client.get(path: "/proxy/#{path}", parameters: parameters, headers: headers)
+      client.get(
+        path: "/proxy/#{path}",
+        parameters: parameters,
+        headers: headers,
+        json: json
+      )
     end
 
     def post(
