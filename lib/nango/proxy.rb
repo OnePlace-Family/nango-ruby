@@ -13,7 +13,8 @@ module Nango
       headers: nil,
       json: true
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id,
+                                     headers: nango_headers)
       client.get(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -31,7 +32,8 @@ module Nango
       nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id,
+                                     headers: nango_headers)
       client.json_post(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -49,7 +51,8 @@ module Nango
       nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id,
+                                     headers: nango_headers)
       client.json_put(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -67,7 +70,8 @@ module Nango
       nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id,
+                                     headers: nango_headers)
       client.json_patch(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -83,7 +87,8 @@ module Nango
       nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id,
+                                     headers: nango_headers)
       client.delete(path: "/proxy/#{path}", headers: headers)
     end
 
