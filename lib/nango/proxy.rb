@@ -9,10 +9,11 @@ module Nango
       integration_id:,
       path:,
       parameters: {},
+      nango_headers: {},
       headers: nil,
       json: true
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
       client.get(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -27,9 +28,10 @@ module Nango
       path:,
       parameters: {},
       query_parameters: {},
+      nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
       client.json_post(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -44,9 +46,10 @@ module Nango
       path:,
       parameters: {},
       query_parameters: {},
+      nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
       client.json_put(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -61,9 +64,10 @@ module Nango
       path:,
       parameters: {},
       query_parameters: {},
+      nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
       client.json_patch(
         path: "/proxy/#{path}",
         parameters: parameters,
@@ -76,20 +80,22 @@ module Nango
       connection_id:,
       integration_id:,
       path:,
+      nango_headers: {},
       headers: nil
     )
-      client = client_for_connection(connection_id: connection_id, integration_id: integration_id)
+      client = client_for_connection(connection_id: connection_id, integration_id: integration_id, headers: nango_headers)
       client.delete(path: "/proxy/#{path}", headers: headers)
     end
 
     private
 
-    def client_for_connection(connection_id:, integration_id:)
+    def client_for_connection(connection_id:, integration_id:, headers: nil)
       client = @client.dup
       client.add_headers(
         "Connection-Id" => connection_id,
         "Provider-Config-Key" => integration_id
       )
+      client.add_headers(headers) if headers
 
       client
     end
