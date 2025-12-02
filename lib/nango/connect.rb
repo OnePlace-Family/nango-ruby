@@ -18,7 +18,7 @@ module Nango
           connection_id: connection_id,
           integration_id: integration_id,
           integrations_config_defaults: integrations_config_defaults
-        }
+        }.compact
       )
     end
   end
