@@ -11,14 +11,10 @@ module Nango
       )
     end
 
-    def reconnect(connection_id:, integration_id:, integrations_config_defaults: nil)
+    def reconnect(parameters: {})
       @client.json_post(
         path: "/connect/sessions/reconnect",
-        parameters: {
-          connection_id: connection_id,
-          integration_id: integration_id,
-          integrations_config_defaults: integrations_config_defaults
-        }.compact
+        parameters: parameters
       )
     end
   end
