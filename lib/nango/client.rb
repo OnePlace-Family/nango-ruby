@@ -12,8 +12,9 @@ module Nango
       uri_base
       request_timeout
       extra_headers
+      faraday_middleware
     ].freeze
-    attr_reader *CONFIG_KEYS, :faraday_middleware
+    attr_reader *CONFIG_KEYS
 
     def initialize(config = {}, &faraday_middleware)
       CONFIG_KEYS.each do |key|
@@ -24,7 +25,7 @@ module Nango
           config[key].nil? ? Nango.configuration.send(key) : config[key]
         )
       end
-      @faraday_middleware = faraday_middleware
+      @faraday_middleware = faraday_middleware if faraday_middleware
     end
 
     def providers

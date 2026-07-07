@@ -96,3 +96,11 @@ client = Nango::Client.new do |f|
   f.response :logger, Logger.new($stdout), bodies: true
 end
 ```
+
+You can also set middleware globally with `Nango.configure`, so every client gets it by default. A block or `faraday_middleware` option passed to `Nango::Client.new` takes precedence over the global config:
+
+```ruby
+Nango.configure do |config|
+  config.faraday_middleware = ->(f) { f.response :logger, Logger.new($stdout), bodies: true }
+end
+```
