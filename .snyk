@@ -1,0 +1,25 @@
+# Snyk (https://snyk.io) policy file. Managed by the security sweep — entries carry
+# reasons + expiries and are re-reviewed automatically when they lapse.
+version: v1.5.0
+ignore:
+  SNYK-RUBY-ERB-16636179:
+    - '*':
+        reason: 'not-applicable: only in .ruby-lsp editor tooling bundle, not in resolved production graph (Gemfile.lock has no erb entry)'
+        expires: 2026-10-21T00:00:00.000Z
+  SNYK-RUBY-ADDRESSABLE-15924312:
+    - '*':
+        reason: 'not-applicable: already patched by resolution — Gemfile.lock has addressable 2.9.0 (>= fix); flagged copy is the .ruby-lsp tooling bundle'
+        expires: 2026-10-21T00:00:00.000Z
+  SNYK-RUBY-RUBYLSP-15812239:
+    - '*':
+        reason: 'not-applicable: ruby-lsp is dev-machine editor tooling (.ruby-lsp bundle), never shipped with the gem'
+        expires: 2026-10-21T00:00:00.000Z
+  SNYK-RUBY-FARADAY-15253521:
+    - '*':
+        reason: 'not-applicable: already patched by resolution — Gemfile.lock has faraday 2.14.1 (>= fix); flagged copy is the .ruby-lsp tooling bundle'
+        expires: 2026-10-21T00:00:00.000Z
+  SNYK-RUBY-URI-13506785:
+    - '*':
+        reason: 'not-applicable: already patched by resolution — Gemfile.lock has uri 1.1.1 (>= fix 1.0.4); flagged copy is the .ruby-lsp tooling bundle'
+        expires: 2026-10-21T00:00:00.000Z
+patch: {}
