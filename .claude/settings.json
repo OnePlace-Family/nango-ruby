@@ -1,0 +1,26 @@
+{
+  "extraKnownMarketplaces": {
+    "oneplace-tools": {
+      "source": { "source": "github", "repo": "OnePlace-Family/claude-plugins" }
+    }
+  },
+  "enabledPlugins": {
+    "guardrails@oneplace-tools": true,
+    "feedback-loop@oneplace-tools": true,
+    "aikido-security-sweep@oneplace-tools": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/format-and-check.sh",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
