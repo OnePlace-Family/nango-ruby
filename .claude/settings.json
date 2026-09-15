@@ -28,8 +28,8 @@
   },
   "permissions": {
     "deny": [
-      "Read(./.env)",
-      "Read(./.env.local)"
+      "Read(/.env)",
+      "Read(/.env.local)"
     ]
   }
 }
