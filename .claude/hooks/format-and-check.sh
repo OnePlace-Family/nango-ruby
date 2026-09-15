@@ -3,9 +3,11 @@
 # as exit 2 so they are fixed in the same turn. Silent exit 0 otherwise.
 set +e
 command -v jq >/dev/null 2>&1 || exit 0
-f=$(jq -r '.tool_input.file_path // ""' 2>/dev/null)
+input=$(cat)
+f=$(jq -r '.tool_input.file_path // ""' <<<"$input" 2>/dev/null)
 [ -n "$f" ] || exit 0
-root="${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null)}"
+cwd=$(jq -r '.cwd // ""' <<<"$input" 2>/dev/null)
+root=$(git -C "${cwd:-.}" rev-parse --show-toplevel 2>/dev/null || printf '%s' "${CLAUDE_PROJECT_DIR:-}")
 [ -n "$root" ] || exit 0
 case "$f" in "$root"/*.rb|"$root"/*.gemspec|"$root"/Rakefile) ;; *) exit 0 ;; esac
 cd "$root" || exit 0

@@ -19,7 +19,3 @@ There is no CI and no git hook. The Claude PostToolUse hook runs `rubocop -a` on
 - Keep `required_ruby_version >= 2.6` unless the consuming app has moved; do not add dependencies beyond Faraday without a reason in the PR body.
 - Bump `lib/nango/version.rb` and `Gemfile.lock` together; the Rails app pins this gem by git ref.
 - Tests use webmock stubs, not live Nango. No tests that assert on log output.
-
-## Pull requests
-
-Body sections in this order: **Why**, **What changed**, **Testing**, **Notes**. Reference the Linear issue by id.
