@@ -1,0 +1,35 @@
+{
+  "extraKnownMarketplaces": {
+    "continuum-tools": {
+      "source": {
+        "source": "github",
+        "repo": "OnePlace-Family/claude-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "guardrails@continuum-tools": true,
+    "feedback-loop@continuum-tools": true,
+    "aikido-security-sweep@continuum-tools": true
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/format-and-check.sh\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "deny": [
+      "Read(/.env)",
+      "Read(/.env.local)"
+    ]
+  }
+}
